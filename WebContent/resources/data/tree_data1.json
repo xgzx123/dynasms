@@ -1,36 +1,36 @@
 [{
 	"id":1,
-	"text":"My Documents",
+	"text":"My DynaSMS",
 	"children":[{
 		"id":11,
-		"text":"Photos",
+		"text":"Message",
 		"state":"closed",
 		"children":[{
 			"id":111,
-			"text":"Friend"
+			"text":"hello"
 		},{
 			"id":112,
-			"text":"Wife"
+			"text":"what"
 		},{
 			"id":113,
-			"text":"Company"
+			"text":"Why"
 		}]
 	},{
 		"id":12,
-		"text":"Program Files",
+		"text":"Question",
 		"children":[{
 			"id":121,
-			"text":"Intel"
+			"text":"Weather"
 		},{
 			"id":122,
-			"text":"Java",
+			"text":"News",
 			"attributes":{
-				"p1":"Custom Attribute1",
-				"p2":"Custom Attribute2"
+				"p1":"news attr1",
+				"p2":"new attr2"
 			}
 		},{
 			"id":123,
-			"text":"Microsoft Office"
+			"text":"GPS"
 		},{
 			"id":124,
 			"text":"Games",
@@ -38,12 +38,12 @@
 		}]
 	},{
 		"id":13,
-		"text":"index.html"
+		"text":"Plugin1"
 	},{
 		"id":14,
-		"text":"about.html"
+		"text":"Plugin2"
 	},{
 		"id":15,
-		"text":"welcome.html"
+		"text":"Plugin3"
 	}]
 }]

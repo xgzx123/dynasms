@@ -11,9 +11,6 @@ import com.et.mvc.JsonView;
 import com.et.mvc.View;
 
 public class UserController extends ApplicationController{
-	/**
-	 * 返回全部用户资料
-	 */
 	public View getUsers() throws Exception{
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("total", users.size());
@@ -22,22 +19,16 @@ public class UserController extends ApplicationController{
 		return new JsonView(result);
 	}
 	
-	/**
-	 * 取得指定的用户资料
-	 */
 	public View getUser(Integer id) throws Exception{
 		User user = users.get(id-1);
 		return new JsonView(user);
 	}
 	
-	/**
-	 * 保存用户资料，这里对用户名称进行非空检验，仅供演示用
-	 */
 	public View save(User user) throws Exception{
 		Map<String,Object> result = new HashMap<String,Object>();
 		if (user.name.length() == 0){
 			result.put("failure", true);
-			result.put("msg", "用户名称必须填写。");
+			result.put("msg", "Name is required!");
 		} else {
 			result.put("success", true);
 			user.id = users.size()+1;
@@ -48,16 +39,13 @@ public class UserController extends ApplicationController{
 		return view;
 	}
 	
-	/**
-	 * 更新指定的用户资料
-	 */
 	public View update(Integer id) throws Exception{
 		Map<String,Object> result = new HashMap<String,Object>();
 		User user = users.get(id-1).clone();
 		updateModel(user);
 		if (user.name.length() == 0){
 			result.put("failure", true);
-			result.put("msg", "用户名称必须填写。");
+			result.put("msg", "Name is required!");
 		} else {
 			result.put("success", true);
 			user.id = id;
@@ -68,7 +56,8 @@ public class UserController extends ApplicationController{
 		return view;
 	}
 	
-	// 用户资料测试数据
+	
+	//init
 	private static List<User> users = new ArrayList<User>();
 	static{
 		for(int i=1; i<10; i++){

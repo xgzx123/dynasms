@@ -2,18 +2,32 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Full Layout - jQuery EasyUI Demo</title>
+		<title>DynaSMS</title>
 		<link rel="stylesheet" type="text/css" href="jQueryEasyUI/themes/default/easyui.css">
 		<link rel="stylesheet" type="text/css" href="jQueryEasyUI/themes/icon.css">
 		<link type="text/css" rel="stylesheet" href="resources/css/main.css">
 		<link rel="stylesheet" type="text/css" href="resources/css/demo.css">
 		<script type="text/javascript" src="jQuery/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="jQueryEasyUI/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="js/user.js"></script>
+		<script type="text/javascript" src="js/dyna/admin/user.js"></script>
+
+		<script src='dwr/engine.js'></script>
+		<script src='dwr/util.js'></script>
+		<script src='dwr/interface/SMSService.js'></script>
+
+		<script type="text/javascript">
+			function btn_onClick() {
+				SMSService.hello("JayZ", callback);
+			}
+
+			function callback(data) {
+				alert(data);
+			}
+		</script>
 	</head>
 	<body class="easyui-layout">
 		<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
-			north region
+			DynaSMS
 		</div>
 		<div data-options="region:'west',split:true,title:'West'" style="width:200px;padding:10px;">
 			<ul class="easyui-tree" data-options="
@@ -26,48 +40,48 @@
 			"></ul>
 		</div>
 		<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
-			east region
+			<input type="button" value="hello" onclick="btn_onClick()"/>
 		</div>
 		<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
-			south region
+			Bottom
 		</div>
 		<div data-options="region:'center',title:'Center'">
 
 			<table id="user-table">
 				<thead>
 					<tr>
-						<th field="name" width="100">名称</th>
-						<th field="phone" width="100">电话</th>
-						<th field="addr" width="100">地址</th>
-						<th field="duty" width="100">职务</th>
+						<th field="name" width="100">Name</th>
+						<th field="phone" width="100">Phone</th>
+						<th field="addr" width="100">Address</th>
+						<th field="duty" width="100">Duty</th>
 					</tr>
 				</thead>
 			</table>
 
-			<div id="user-window" title="用户窗口" style="width:400px;height:250px;">
+			<div id="user-window" title="UserWindow" style="width:400px;height:250px;">
 				<div style="padding:20px 20px 40px 80px;">
 					<form method="post">
 						<table>
 							<tr>
-								<td>名称：</td>
+								<td>Name:</td>
 								<td>
 								<input name="name">
 								</input></td>
 							</tr>
 							<tr>
-								<td>电话：</td>
+								<td>Phone:</td>
 								<td>
 								<input name="phone">
 								</input></td>
 							</tr>
 							<tr>
-								<td>地址：</td>
+								<td>Address</td>
 								<td>
 								<input name="addr">
 								</input></td>
 							</tr>
 							<tr>
-								<td>职务：</td>
+								<td>Duty:</td>
 								<td>
 								<input name="duty">
 								</input></td>

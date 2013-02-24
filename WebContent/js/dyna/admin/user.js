@@ -1,20 +1,20 @@
 $(function(){
 	grid = $('#user-table').datagrid({
 		url:'/demo1/user/getUsers',
-		title:'用户资料',
+		title:'Users',
 		width:600,
 		height:300,
 		singleSelect:true,
 		toolbar:[{
-			text:'新增',
+			text:'New',
 			iconCls:'icon-add',
 			handler:newUser
 		},'-',{
-			text:'修改',
+			text:'Edit',
 			iconCls:'icon-edit',
 			handler:editUser
 		},'-',{
-			text:'删除',
+			text:'Delete',
 			iconCls:'icon-remove'
 		}]
 	});
@@ -42,8 +42,8 @@ function editUser(){
 		form.url = '/demo1/user/update/'+row.id;
 	} else {
 		$.messager.show({
-			title:'警告', 
-			msg:'请先选择用户资料。'
+			title:'Warning', 
+			msg:'Please select user first!'
 		});
 	}
 }
@@ -56,7 +56,7 @@ function saveUser(){
 				grid.datagrid('reload');
 				win.window('close');
 			} else {
-				$.messager.alert('错误',data.msg,'error');
+				$.messager.alert('Error',data.msg,'error');
 			}
 		}
 	});
