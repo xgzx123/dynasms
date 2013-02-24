@@ -14,16 +14,7 @@
 		<script src='dwr/engine.js'></script>
 		<script src='dwr/util.js'></script>
 		<script src='dwr/interface/SMSService.js'></script>
-
-		<script type="text/javascript">
-			function btn_onClick() {
-				SMSService.hello("JayZ", callback);
-			}
-
-			function callback(data) {
-				alert(data);
-			}
-		</script>
+		<script src='js/dyna/dwr/smsservice.js'></script>
 	</head>
 	<body class="easyui-layout">
 		<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
@@ -40,10 +31,10 @@
 			"></ul>
 		</div>
 		<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
-			<input type="button" value="hello" onclick="btn_onClick()"/>
+			Trail
 		</div>
 		<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
-			Bottom
+			<input type="button" value="hello" onclick="dwrCall_hello()"/>
 		</div>
 		<div data-options="region:'center',title:'Center'">
 
