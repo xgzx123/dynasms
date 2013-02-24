@@ -1,0 +1,24 @@
+body {
+	font-size: smaller;
+}
+
+/* Override jQuery UI theme's padding on buttons: */
+.ui-button-text-only .ui-button-text {
+	padding: 0.2em 0.5em;
+}
+
+.tooltip {
+	top: 0;
+	left: 0;
+	position: absolute;
+	z-index: 99;
+	display: none;
+}
+
+.contentSection {
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	width: 90%
+}
