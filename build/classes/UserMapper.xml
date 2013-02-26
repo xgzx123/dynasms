@@ -9,43 +9,40 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     author badqiu email:badqiu(a)gmail.com
 -->
 
-<mapper namespace="UserInfo">
+<mapper namespace="UserMapper">
 
-	<resultMap id="UserInfoResult" type="models.UserInfo">
+	<resultMap id="UserResult" type="models.User">
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="commonColumns">
 	    <![CDATA[
-        	user_id as userId,
-        	username as username,
-        	password as password,
-        	birth_date as birthDate,
-        	sex as sex,
-        	age as age
+        	user_id as id,
+        	user_name as name,
+        	user_phone as phone,
+        	user_addr as addr,
+        	user_duty as duty
 	    ]]>
 	</sql>
 
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="insert" parameterType="models.UserInfo" 
-		useGeneratedKeys="true" keyProperty="userId" 
+	<insert id="insert" parameterType="models.User" 
+		useGeneratedKeys="true" keyProperty="id" 
 	>
     <![CDATA[
         INSERT INTO
         user_info (
         	user_id ,
-        	username ,
-        	password ,
-        	birth_date ,
-        	sex ,
-        	age 
+        	user_name ,
+        	user_phone ,
+        	user_addr ,
+        	user_duty
         ) VALUES (
-        	#{userId,jdbcType=BIGINT} ,
-        	#{username,jdbcType=VARCHAR} ,
-        	#{password,jdbcType=VARCHAR} ,
-        	#{birthDate,jdbcType=DATE} ,
-        	#{sex,jdbcType=TINYINT} ,
-        	#{age,jdbcType=INTEGER} 
+        	#{id,jdbcType=BIGINT} ,
+        	#{name,jdbcType=VARCHAR} ,
+        	#{phone,jdbcType=VARCHAR} ,
+        	#{addr,jdbcType=VARCHAR} ,
+        	#{duty,jdbcType=VARCHAR}
         )
     ]]>
 		<!--	
@@ -57,16 +54,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		-->
 	</insert>
     
-	<update id="update" parameterType="models.UserInfo">
+	<update id="update" parameterType="models.User">
     <![CDATA[
         UPDATE user_info SET
-	        username = #{username,jdbcType=VARCHAR} ,
-	        password = #{password,jdbcType=VARCHAR} ,
-	        birth_date = #{birthDate,jdbcType=DATE} ,
-	        sex = #{sex,jdbcType=TINYINT} ,
-	        age = #{age,jdbcType=INTEGER} 
+	        user_name = #{name,jdbcType=VARCHAR} ,
+	        user_phone = #{phone,jdbcType=VARCHAR} ,
+	        user_addr = #{addr,jdbcType=VARCHAR} ,
+	        user_duty = #{duty,jdbcType=VARCHAR} 
         WHERE 
-	        user_id = #{userId} 
+	        user_id = #{id} 
     ]]>
 	</update>
 
@@ -77,7 +73,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     ]]>
     </delete>
     
-    <select id="getById" parameterType="java.lang.Long" resultMap="UserInfoResult">
+    <select id="getById" parameterType="java.lang.Long" resultMap="UserResult">
 		select <include refid="commonColumns" />
 	    <![CDATA[
 		    from user_info 
@@ -88,23 +84,20 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	
 	<sql id="dynamicWhere">
 		<where>
-	       <if test="userId != null">
-				and user_id = #{userId}
+	       <if test="id != null">
+				and user_id = #{id}
 			</if>
-	       <if test="username != null">
-				and username = #{username}
+	       <if test="name != null">
+				and user_name  = #{name}
 			</if>
-	       <if test="password != null">
-				and password = #{password}
+	       <if test="phone != null">
+				and user_phone  = #{phone}
 			</if>
-	       <if test="birthDate != null">
-				and birth_date = #{birthDate}
+	       <if test="addr != null">
+				and user_addr = #{addr}
 			</if>
-	       <if test="sex != null">
-				and sex = #{sex}
-			</if>
-	       <if test="age != null">
-				and age = #{age}
+	       <if test="duty != null">
+				and user_duty = #{duty}
 			</if>
 		</where>
 	</sql>
@@ -118,7 +111,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="pageSelect" resultMap="UserInfoResult">
+    <select id="pageSelect" resultMap="UserResult">
     	select <include refid="commonColumns" />
 	    from user_info 
 		<include refid="dynamicWhere"/>

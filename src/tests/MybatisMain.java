@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import models.UserInfo;
+import models.User;
 /**
  * @author badqiu
  */
@@ -25,35 +25,37 @@ public class MybatisMain {
 
 	private static void testCrud(SqlSession session) {
 		
-		UserInfo user = new UserInfo();
-		user.setPassword("pwd_1!aSw29");
-		user.setAge(100);
+		User user = new User();
+		user.setName("JayZ");
+		user.setPhone("13488888888");
+		user.setAddr("shanghai");
+		user.setDuty("software engineer");
 		
 		//test insert
-		session.insert("UserInfo.insert",user);
-		UserInfo fromDb = (UserInfo) session.selectOne("UserInfo.getById", user.getUserId());
+		session.insert("UserMapper.insert",user);
+		User fromDb = (User) session.selectOne("UserMapper.getById", user.getId());
 		session.commit();
 		System.out.println("user:"+user);
 		System.out.println("fromDb:"+fromDb);
 		assertTrue(user.equals(fromDb));
 		
 		//test update
-		user.setUsername("badqiu");
-		session.update("UserInfo.update",user);
-		fromDb = (UserInfo) session.selectOne("UserInfo.getById", user.getUserId());
+		user.setName("badqiu");
+		session.update("UserMapper.update",user);
+		fromDb = (User) session.selectOne("UserMapper.getById", user.getId());
 		assertTrue(user.equals(fromDb));
 		
 		// test select
-		Long count = (Long)session.selectOne("UserInfo.count",user);
+		Long count = (Long)session.selectOne("UserMapper.count",user);
 		assertTrue(1 == count);
-		List list = session.selectList("UserInfo.pageSelect",user);
-		fromDb = (UserInfo)list.get(0);
-		assertTrue(fromDb.getUsername().equals(user.getUsername()));
+		List list = session.selectList("UserMapper.pageSelect",user);
+		fromDb = (User)list.get(0);
+		assertTrue(fromDb.getName().equals(user.getName()));
 		assertTrue(fromDb.equals(user));
 		 
 		//test delete
-		session.delete("UserInfo.delete",user.getUserId());
-		fromDb = (UserInfo) session.selectOne("UserInfo.getById", user.getUserId());
+		session.delete("UserMapper.delete",user.getId());
+		fromDb = (User) session.selectOne("UserMapper.getById", user.getId());
 		assertTrue(fromDb == null);
 	}
 	

@@ -34,6 +34,8 @@ public class UserController extends ApplicationController{
 			user.id = users.size()+1;
 			users.add(user);
 		}
+		//TODO permanent save using mybatis "MybatisMain.java"
+		
 		View view = new JsonView(result);
 		view.setContentType("text/html;charset=utf-8");
 		return view;
@@ -51,6 +53,8 @@ public class UserController extends ApplicationController{
 			user.id = id;
 			users.set(id-1, user);
 		}
+		//TODO permanent save using mybatis "MybatisMain.java"
+		
 		View view = new JsonView(result);
 		view.setContentType("text/html;charset=utf-8");
 		return view;
