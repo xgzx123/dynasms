@@ -9,12 +9,15 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/demo.css">
 		<script type="text/javascript" src="jQuery/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="jQueryEasyUI/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="js/dyna/admin/user.js"></script>
-
+		<script data-main="js/dyna/main" src="requireJS/require.js"></script>
+		
 		<script src='dwr/engine.js'></script>
 		<script src='dwr/util.js'></script>
 		<script src='dwr/interface/SMSService.js'></script>
-		<script src='js/dyna/dwr/smsservice.js'></script>
+		
+		
+		<!--script type="text/javascript" src="js/dyna/admin/user.js"></script>
+		<script src='js/dyna/dwr/smsservice.js'></script-->
 	</head>
 	<body class="easyui-layout">
 		<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
@@ -34,7 +37,7 @@
 			Trail
 		</div>
 		<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
-			<input type="button" value="hello" onclick="dwrCall_hello()"/>
+			<input type="button" value="hello" onclick="main.smsservice.dwrCall_hello()"/>
 		</div>
 		<div data-options="region:'center',title:'Center'">
 
@@ -81,8 +84,8 @@
 					</form>
 				</div>
 				<div style="text-align:center;padding:5px;">
-					<a href="javascript:void(0)" onclick="saveUser()" id="btn-save" icon="icon-save">保存</a>
-					<a href="javascript:void(0)" onclick="closeWindow()" id="btn-cancel" icon="icon-cancel">取消</a>
+					<a href="javascript:void(0)" onclick="main.user.saveUser()" id="btn-save" icon="icon-save">保存</a>
+					<a href="javascript:void(0)" onclick="main.user.closeWindow()" id="btn-cancel" icon="icon-cancel">取消</a>
 				</div>
 			</div>
 		</div>
