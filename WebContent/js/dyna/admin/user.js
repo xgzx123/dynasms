@@ -8,70 +8,91 @@ define([
     	
     	this.init = function(){
     		//init grid
-    		this.grid = $('#user-table').datagrid({
-    			url:'/DynaSMS/user/getUsers',
-    			title:'Users',
-    			width:600,
-    			height:300,
-    			singleSelect:true,
-    			toolbar:[{
-    				text:'New',
-    				iconCls:'icon-add',
-    				handler:this.newUser
-    			},'-',{
-    				text:'Edit',
-    				iconCls:'icon-edit',
-    				handler:this.editUser
-    			},'-',{
-    				text:'Delete',
-    				iconCls:'icon-remove'
-    			}]
+    		$.getJSON("userController!returnUsers.action",$.proxy(function(data){
+				this.grid = $('#user-table').datagrid({
+	    			title:'Users',
+	    			width:600,
+	    			height:300,
+	    			singleSelect:true,
+	    			toolbar:[{
+	    				text:'New',
+	    				iconCls:'icon-add',
+	    				handler:this.newUser
+	    			},'-',{
+	    				text:'Edit',
+	    				iconCls:'icon-edit',
+	    				handler:this.editUser
+	    			},'-',{
+	    				text:'Delete',
+	    				iconCls:'icon-remove'
+	    			}]
+	    		}).datagrid('loadData',data.users);
+				
+				$('#btn-save,#btn-cancel').linkbutton();
+	    		this.win = $('#user-window').window({
+	    			closed:true
+	    		});
+	    		this.form = this.win.find('form');
+			}, this));
+    		
+    		
+    		
+    		$("#postMessage").click(function(){
+    			$.ajax({
+        			url:"userController!save.action",
+        			type:"POST",
+        			data:{name: "xxx", phone: "111"},
+        			dataType:"json",
+        			success:function(data){
+        				console.log(data);
+        			}
+        		});
     		});
-    		$('#btn-save,#btn-cancel').linkbutton();
-    		this.win = $('#user-window').window({
-    			closed:true
-    		});
-    		this.form = this.win.find('form');
     	};
     	
-    	this.newUser = function(){
+    	this.newUser = $.proxy(function(){
     		this.win.window('open');
     		this.form.form('clear');
-    		this.form.url = '/DynaSMS/user/save';
-    	};
+    		this.form.url = 'userController!newUser.action';
+    	}, this);
     	
-    	this.editUser = function(){
+    	this.editUser = $.proxy(function(){
     		var row = this.grid.datagrid('getSelected');
     		if (row){
     			this.win.window('open');
-    			this.form.form('load', '/DynaSMS/user/getUser/'+row.id);
-    			this.form.url = '/DynaSMS/user/update/'+row.id;
+    			$.getJSON("userController!returnUser.action?id="+row.id, $.proxy(function(data){
+    				this.form.form('load', data.user);
+    				this.form.url = 'userController!updateUser.action?id='+row.id;
+    			}, this));
     		} else {
     			$.messager.show({
     				title:'Warning', 
     				msg:'Please select user first!'
     			});
     		}
-    	};
+    	}, this);
     	
-    	this.saveUser = function(){
+    	this.saveUser = $.proxy(function(){
     		this.form.form('submit', {
     			url:this.form.url,
-    			success:function(data){
+    			success:$.proxy(function(data){
     				eval('data='+data);
-    				if (data.success){
-    					this.grid.datagrid('reload');
-    					this.win.window('close');
+    				if (data.message && data.message == "success"){
+    					$.getJSON("userController!returnUsers.action",$.proxy(function(data){
+    						this.grid.datagrid('loadData', data.users);
+    						this.win.window('close');
+    					}, this));
+    					
     				} else {
     					$.messager.alert('Error',data.msg,'error');
     				}
-    			}
+    			}, this)
     		});
-    	};
+    	}, this);
     	
-    	this.closeWindow = function(){
+    	this.closeWindow = $.proxy(function(){
     		this.win.window('close');
-    	}
+    	}, this);
     	
     	
     }

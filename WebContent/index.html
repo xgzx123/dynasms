@@ -25,12 +25,12 @@
 		</div>
 		<div data-options="region:'west',split:true,title:'West'" style="width:200px;padding:10px;">
 			<ul class="easyui-tree" data-options="
-			url: 'resources/data/tree_data1.json',
-			animate: true,
-			dnd: true,
-			onClick: function(node){
-			$(this).tree('beginEdit',node.target);
-			}
+				url: 'resources/data/tree_data1.json',
+				animate: true,
+				dnd: true,
+				onClick: function(node){
+					$(this).tree('beginEdit',node.target);
+				}
 			"></ul>
 		</div>
 		<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
@@ -38,6 +38,8 @@
 		</div>
 		<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
 			<input type="button" value="hello" onclick="main.smsservice.dwrCall_hello()"/>
+			<input id="getMessage" type="button" value="ajax_struts"/>
+			<input id="postMessage" type="button" value="ajax_struts_post"/>
 		</div>
 		<div data-options="region:'center',title:'Center'">
 
@@ -84,8 +86,8 @@
 					</form>
 				</div>
 				<div style="text-align:center;padding:5px;">
-					<a href="javascript:void(0)" onclick="main.user.saveUser()" id="btn-save" icon="icon-save">保存</a>
-					<a href="javascript:void(0)" onclick="main.user.closeWindow()" id="btn-cancel" icon="icon-cancel">取消</a>
+					<a href="javascript:void(0)" onclick="main.user.saveUser()" id="btn-save" icon="icon-save">Save</a>
+					<a href="javascript:void(0)" onclick="main.user.closeWindow()" id="btn-cancel" icon="icon-cancel">Cancel</a>
 				</div>
 			</div>
 		</div>
