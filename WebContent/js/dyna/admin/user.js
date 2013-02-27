@@ -34,20 +34,6 @@ define([
 	    		});
 	    		this.form = this.win.find('form');
 			}, this));
-    		
-    		
-    		
-    		$("#postMessage").click(function(){
-    			$.ajax({
-        			url:"userController!save.action",
-        			type:"POST",
-        			data:{name: "xxx", phone: "111"},
-        			dataType:"json",
-        			success:function(data){
-        				console.log(data);
-        			}
-        		});
-    		});
     	};
     	
     	this.newUser = $.proxy(function(){
