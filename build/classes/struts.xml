@@ -11,5 +11,9 @@
     		<result name="user" type="json"></result>
     		<result name="message" type="json"></result>
     	</action>
+    	<action name="SMSMessageHandler" class="controller.SMSMessageHandler">
+    	</action>
     </package>
+    
+    
 </struts>
