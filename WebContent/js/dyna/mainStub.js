@@ -1,10 +1,14 @@
 define([
 	"./admin/user",
-	"./dwr/smsservice"
-], function(user, smsservice) {
+	"./dwr/smsservice",
+	"./controls/viewsControl"
+], function(user, smsservice, viewsControl) {
 	return function() {
 		this.user = new user();
 		this.smsservice = new smsservice();
+		this.viewsControl = new viewsControl();
+		
+		
 		this.init = function(){
 			this.user.init();
 			this.smsservice.init();
